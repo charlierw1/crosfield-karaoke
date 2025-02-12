@@ -1,9 +1,21 @@
+import sys, os
 from render import updateArea
 from time import sleep
 from random import shuffle
 # Import Libraries
 
+parent_dir = os.path.abspath(os.path.dirname(__file__))
+library_dir = os.path.join(parent_dir, 'libraries')
+sys.path.append(library_dir)
+# Define libraries folder
 
+import pyttsx3
+# Import local libraries
+
+engine = pyttsx3.init()
+def TTS(say):
+    engine.say(say)
+    engine.runAndWait()
 class Commands:  # Class for setting commands to whatever is needed
     help = "help"
     exit = "exit"
@@ -59,7 +71,8 @@ while True:
             message = cmds
 
         case Commands.exit:
-            break
+            TTS("Goodbye")
+            break 
 
         case Commands.add:
             if not locked:
@@ -69,11 +82,14 @@ while True:
                     case "" | "next" | "add":  # Making sure mistakes don't get added to the queue
                         message = "Invalid song name!"
                     case other:
-                        songlist.append(song)
-                        message = "Song added to the queue"
                         if len(spacequeue) > 0:
-                            message = f"Song added to the queue and so was {spacequeue[0]}"
+                            message = f"{song} added to the queue and so was {spacequeue[0]}"
                             songlist.append(spacequeue.pop(0))
+                            TTS(message)
+                        else:
+                            songlist.append(song)
+                            message = f"{song} added to the queue"
+                            TTS(message)
 
             else:
                 message = "The queue is currently locked and can't be altered."
@@ -87,7 +103,8 @@ while True:
                         message = "Invalid song name!"
                     case other:
                         spacequeue.append(song)
-                        message = "Song added to the space queue"
+                        message = f"{song} added to the space queue"
+                        TTS(message)
 
         case Commands.remove:
             if not locked:
@@ -118,7 +135,7 @@ while True:
                 message = f"next up is {songlist[0]}"
                 updateArea(textbox, message, "blink2 red", True)
                 songlist.pop(0)
-                sleep(4)
+                TTS(message)
             except IndexError:
                 message = "Queue is empty, to add something to the queue, type 'add'"
 
@@ -129,6 +146,7 @@ while True:
                 try:
                     message = f"{songlist[int(skip) - 1]} is now next in the queue"
                     songlist.insert(0, songlist.pop(int(skip) - 1))
+                    TTS(message)
                 except ValueError:
                     message = "Please enter a number in the list"
                 except IndexError:
@@ -148,3 +166,4 @@ while True:
                 message = cmds
             else:
                 message = f"'{unknown_command}' not recognised as a command, please try again"
+                TTS(message)
