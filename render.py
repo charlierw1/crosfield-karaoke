@@ -46,7 +46,7 @@ side_art = """
 ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
 ░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
 ░▒▓█▓▒░      ░▒▓█▓▒░▒▓████████▓▒░▒▓████████▓▒░▒▓███████▓▒░
-""" # ASCII art that go on the left and right panels
+"""  # ASCII art that go on the left and right panels
 
 # Set up the area panels that the content will go in using rich as well as the style of them
 layout.split_column(
@@ -81,7 +81,7 @@ layout["leftspace"].update(
 )
 
 layout["helpbar"].update(
-    Layout(Panel("Type 'help' to list commands!", style = "on black" ))
+    Layout(Panel("Type 'help' to list commands!", style = "on black"))
 )
 
 layout["queue"].update(
