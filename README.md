@@ -1,3 +1,3 @@
 Basic Karaoke Program
 
-Requires Rich
+Requires Rich and pyttsx3
