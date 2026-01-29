@@ -21,7 +21,7 @@ class Commands:  # Class for setting commands to whatever is needed
     exit = "exit"
     add = "add"
     remove = "remove"
-    lock = "lockjudelol"
+    lock = "lock"
     next = "next"
     skip = "skip"
     shuffle = "shuffle"
@@ -167,3 +167,4 @@ while True:
             else:
                 message = f"'{unknown_command}' not recognised as a command, please try again"
                 TTS(message)
+
